@@ -1,0 +1,252 @@
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Admin Panel</title>
+		<!-- Bootstrap Core CSS -->
+	<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+	<!-- Custom CSS -->
+	<link href="css/style.css" rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/morris.css" type="text/css" />
+	<!-- Graph CSS -->
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<!-- jQuery -->
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<!-- //jQuery -->
+	<!-- tables -->
+	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+	<link rel="stylesheet" type="text/css" href="css/basictable.css" />
+	<script type="text/javascript" src="js/jquery.basictable.min.js"></script>
+
+	<!-- //tables -->
+	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet'
+		type='text/css' />
+	<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<!-- lined-icons -->
+	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
+	<!-- //lined-icons -->
+</head>
+
+<body>
+	<div class="page-container">
+		<!--/content-inner-->
+		<div class="left-content">
+			<div class="mother-grid-inner">
+				<!--header start here-->
+				
+				<!--heder end here-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a><i class="fa fa-angle-right"></i>Category
+					</li>
+				</ol>
+				<div class="agile-grids">
+					<!-- tables -->
+
+					<div class="agile-tables">
+						<div class="w3l-table-info">
+							<h2>Categories</h2>
+							<table id="table">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th style="padding-left:200px;">Image</th>
+										<th>Action</th>
+										
+									</tr>
+								</thead>
+								<tbody id="showcat">
+								
+								
+									
+
+									</tbody>
+							</table>
+						</div>
+					
+
+				
+
+					</div>
+					<!-- //tables -->
+				</div>
+				<!-- script-for sticky-nav -->
+			
+				<!-- /script-for sticky-nav -->
+				<!--inner block start here-->
+				<div class="inner-block">
+
+				</div>
+				<!--inner block end here-->
+				<!--copy rights start here-->
+				<div class="copyrights"  style="    position: fixed;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				
+				color: white;
+				text-align: center;">
+					<p>©Admin Panel. All Rights Reserved</a> </p>
+				</div>
+				<!--COPY rights end here-->
+			</div>
+		</div>
+		<!--//content-inner-->
+		<!--/sidebar-menu-->
+		<div class="sidebar-menu">
+				<header class="logo1">
+					<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a>
+				</header>
+				<div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
+				<div class="menu">
+					<ul id="menu">
+						<li><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span>
+								<div class="clearfix"></div>
+							</a></li>
+					
+						
+						<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i><span>Category</span> <span
+									class="fa fa-angle-right" style="float: right"></span>
+								<div class="clearfix"></div>
+							</a>
+							<ul>
+								<li><a href="addcategory.html"> Add Category</a></li>
+								<li><a href="listcategory.html">List Category</a></li>
+							</ul>
+						</li>
+						<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i><span>Brand</span> <span
+							class="fa fa-angle-right" style="float: right"></span>
+						<div class="clearfix"></div>
+					</a>
+					<ul>
+						<li><a href="addbrand.html"> Add Brand</a></li>
+						<li><a href="listbrand.html">List Brand</a></li>
+					</ul>
+				</li>
+					
+						<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i><span>Product</span> <span
+									class="fa fa-angle-right" style="float: right"></span>
+								<div class="clearfix"></div>
+							</a>
+							<ul>
+								<li><a href="addproduct.html"> Add Product</a></li>
+								<li><a href="listproduct.html">List Product</a></li>
+							</ul>
+						</li>
+						<li><a href="index.html"><i class="fa fa-check-square-o nav_icon"></i> <span>Logout</span>
+							<div class="clearfix"></div>
+						</a></li>
+	
+					</ul>
+				</div>
+			</div>
+		<div class="clearfix"></div>
+	</div>
+
+	<!--js -->
+	<script src="js/jquery.nicescroll.js"></script>
+	<script src="js/scripts.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- /Bootstrap Core JavaScript -->
+
+</body>
+
+</html>
+
+<script>
+		const token=localStorage.getItem("token_admin");
+	 console.log(token);
+	if(token == ""){
+		$(location).attr('href', 'signin.html')
+	}
+	function delete_cat(id){
+		  //alert(id)
+		  const token=localStorage.getItem("token_admin");
+			
+			
+			let url = 'http://localhost:3000/api/setup/category/delete/'+id;
+
+									fetch(url, {
+									method: 'DELETE', 
+									headers:{
+										'Content-Type': 'application/json',
+										
+										'x-access-token':token
+										
+									},
+									
+									}).then(res => res.json())
+									.then(function(data) {
+									//toastr.success('Removed', 'Success ', {timeOut: 5000})
+									alert("Success")
+									load_category();
+
+									})
+									.catch(error => console.error('Error:', error),					
+									//toastr.error('Something Went Wrong !', 'Error ', {timeOut: 5000})
+									);
+				
+			}
+
+	$( document ).ready(function() {
+		load_category();
+	});
+		function load_category(){
+				const token=localStorage.getItem("token_admin");
+				if(token != null || token != ""){
+
+					let html='';
+					
+					let url = 'http://localhost:3000/api/setup/category';
+
+								fetch(url, {
+								method: 'GET', 
+								headers:{
+									'Content-Type': 'application/json',
+									
+									'x-access-token':token
+									
+								}
+								}).then(res => res.json())
+								.then(function(data) {
+								console.log(data)
+
+							$.each( data, function( key, value ) {
+							
+								
+								html+='	<tr>'+
+
+											'<td style="border:none;">'+
+
+											value.Name+
+											'</td>'+
+											'<td style="border:none;padding-left:200px;"><img src="http://localhost:3000/uploads/category/'+value.Image+'" style="width:30%;height:30%"></td>'+
+											'<td style="border:none;">'+
+												'<a href="editcategory.html?id='+value.Id+'"><i class="fs-16 fa fa-pencil " style="color:green;" aria-hidden="true"></i></a>&nbsp;&nbsp;'+
+												'<a href="javascript:void(0)" onclick="delete_cat(\'' + value.Id + '\')"><i class="fs-16 fa fa-trash red" style="color:red;" aria-hidden="true"></i></a>'+
+
+												'</td>'+
+
+
+											'</tr>';
+								});
+								$("#showcat").html(html);
+
+								
+								
+
+								})
+
+								
+								.catch(error => console.error('Error:', error),					
+								//toastr.error('Something Went Wrong !', 'Error ', {timeOut: 5000})
+								);
+
+			}
+				
+			}
+			
+
+
+</script>

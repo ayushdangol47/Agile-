@@ -1,0 +1,4 @@
+module.exports = {
+    "up": "CREATE TABLE `products` (`Id` varchar(64) NOT NULL,`Name` longtext NOT NULL,`Code` MEDIUMTEXT NOT NULL,`IsActive` tinyint(1) NOT NULL,`Description` longtext NULL,`Long_Description` longtext NULL,`T_Description` longtext NOT NULL,`CategoryId` varchar(64) NOT NULL,`BrandId` varchar(64) NOT NULL,`Quantity` varchar(64) NOT NULL,`Color` varchar(64) NOT NULL,`Size` varchar(64) NOT NULL,`Image` varchar(255) NOT NULL,`Price` float(22) NOT NULL, PRIMARY KEY (`Id`), UNIQUE KEY `Id` (`Id`),  KEY `CategoryId_idx` (`CategoryId`), KEY `BrandId_idx` (`BrandId`), CONSTRAINT `ProductCategoryId` FOREIGN KEY (`CategoryId`) REFERENCES `category` (`Id`), CONSTRAINT `ProductBrandId` FOREIGN KEY (`BrandId`) REFERENCES `brand` (`Id`));",
+    "down": "DROP TABLE `products`"
+}

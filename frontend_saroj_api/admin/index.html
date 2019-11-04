@@ -1,0 +1,248 @@
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Admin Panel</title>
+		<!-- Bootstrap Core CSS -->
+	<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+	<!-- Custom CSS -->
+	<link href="css/style.css" rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/morris.css" type="text/css" />
+	<!-- Graph CSS -->
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<!-- jQuery -->
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<!-- //jQuery -->
+	<!-- tables -->
+	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+	<link rel="stylesheet" type="text/css" href="css/basictable.css" />
+	<script type="text/javascript" src="js/jquery.basictable.min.js"></script>
+
+	<!-- //tables -->
+	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet'
+		type='text/css' />
+	<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<!-- lined-icons -->
+	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
+	<!-- //lined-icons -->
+</head>
+
+<body>
+	<div class="page-container">
+		<!--/content-inner-->
+		<div class="left-content">
+			<div class="mother-grid-inner">
+				<!--header start here-->
+				
+				<!--heder end here-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a><i class="fa fa-angle-right"></i>Dashboard
+					</li>
+				</ol>
+				<div class="agile-grids">
+					<!-- tables -->
+
+					<div class="agile-tables">
+						<div class="w3l-table-info">
+							<h2>Dashboard</h2>
+							<table id="table">
+								<thead>
+									<tr>
+                                            <th>SN</th>
+                                        <th>Customer Name</th>
+                                        <th>Customer Address</th>
+                                        <th>Contact Details</th>
+                                        <th>Total Price</th>
+                                        <th>Order Date</th>
+                                        
+								
+										
+									</tr>
+								</thead>
+								<tbody id="showcat">
+								
+								
+									
+
+									</tbody>
+							</table>
+						</div>
+					
+
+				
+
+					</div>
+					<!-- //tables -->
+				</div>
+				<!-- script-for sticky-nav -->
+			
+				<!-- /script-for sticky-nav -->
+				<!--inner block start here-->
+				<div class="inner-block">
+
+				</div>
+				<!--inner block end here-->
+				<!--copy rights start here-->
+				<div class="copyrights"  style="    position: fixed;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				
+				color: white;
+				text-align: center;">
+					<p>©Admin Panel. All Rights Reserved</a> </p>
+				</div>
+				<!--COPY rights end here-->
+			</div>
+		</div>
+		<!--//content-inner-->
+		<!--/sidebar-menu-->
+		<div class="sidebar-menu">
+				<header class="logo1">
+					<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a>
+				</header>
+				<div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
+				<div class="menu">
+					<ul id="menu">
+						<li><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span>
+								<div class="clearfix"></div>
+							</a></li>
+					
+						
+						<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i><span>Category</span> <span
+									class="fa fa-angle-right" style="float: right"></span>
+								<div class="clearfix"></div>
+							</a>
+							<ul>
+								<li><a href="addcategory.html"> Add Category</a></li>
+								<li><a href="listcategory.html">List Category</a></li>
+							</ul>
+						</li>
+						<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i><span>Brand</span> <span
+							class="fa fa-angle-right" style="float: right"></span>
+						<div class="clearfix"></div>
+					</a>
+					<ul>
+						<li><a href="addbrand.html"> Add Brand</a></li>
+						<li><a href="listbrand.html">List Brand</a></li>
+					</ul>
+				</li>
+					
+						<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i><span>Product</span> <span
+									class="fa fa-angle-right" style="float: right"></span>
+								<div class="clearfix"></div>
+							</a>
+							<ul>
+								<li><a href="addproduct.html"> Add Product</a></li>
+								<li><a href="listproduct.html">List Product</a></li>
+							</ul>
+						</li>
+						<li><a href="index.html"><i class="fa fa-check-square-o nav_icon"></i> <span>Logout</span>
+							<div class="clearfix"></div>
+						</a></li>
+	
+					</ul>
+				</div>
+			</div>
+		<div class="clearfix"></div>
+	</div>
+
+	<!--js -->
+	<script src="js/jquery.nicescroll.js"></script>
+	<script src="js/scripts.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- /Bootstrap Core JavaScript -->
+
+</body>
+
+</html>
+
+<script>
+	
+		const token=localStorage.getItem("token_admin");
+	 console.log(token);
+	if(token == ""){
+		$(location).attr('href', 'signin.html')
+	}
+	
+	$( document ).ready(function() {
+		load_order();
+	});
+		function load_order(){
+				const token=localStorage.getItem("token_admin");
+
+                if(token != null || token != ""){
+
+                    let html='';
+                    let i=0;
+					
+					let url = 'http://localhost:3000/api/v1/orders';
+
+								fetch(url, {
+								method: 'GET', 
+								headers:{
+									'Content-Type': 'application/json',
+									
+									'x-access-token':token
+									
+								}
+								}).then(res => res.json())
+								.then(function(data) {
+								console.log(data)
+
+							$.each( data, function( key, value ) { i=i+1;
+							
+								
+                                html+='	<tr>'+
+                                    
+											'<td style="border:none;">'+
+
+                                            i+
+                                            '</td>'+
+                                            '<td style="border:none;">'+
+
+                                                value.fullname+
+                                                '</td>'+
+                                                '<td style="border:none;">'+
+
+                                                value.Landmark+ ", "+value.City+
+                                                '</td>'+
+                                                '<td style="border:none;">'+
+
+                                                value.Contact+
+                                                '</td>'+
+                                                '<td style="border:none;">Rs.'+
+
+                                                value.Totalprice+
+                                                '</td>'+
+                                                '<td style="border:none;">'+
+
+                                                    value.odate+
+                                                    '</td>'+
+                                                  
+										
+
+
+											'</tr>';
+								});
+								$("#showcat").html(html);
+
+								
+								
+
+								})
+
+								
+								.catch(error => console.error('Error:', error),					
+								//toastr.error('Something Went Wrong !', 'Error ', {timeOut: 5000})
+								);
+
+			}
+				
+			}
+			
+
+
+</script>

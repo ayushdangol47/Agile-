@@ -1,0 +1,246 @@
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title> Admin Panel</title>
+	<!-- Bootstrap Core CSS -->
+	<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+	<!-- Custom CSS -->
+	<link href="css/style.css" rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/morris.css" type="text/css" />
+	<!-- Graph CSS -->
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<!-- jQuery -->
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<!-- //jQuery -->
+	<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet'
+		type='text/css' />
+	<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<!-- lined-icons -->
+	<link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
+	<!-- //lined-icons -->
+</head>
+
+<body>
+	<div class="page-container">
+		<!--/content-inner-->
+		<div class="left-content">
+			<div class="mother-grid-inner">
+				<!--header start here-->
+				
+				<!--heder end here-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a> <i class="fa
+						fa-angle-right"></i>Category <i class="fa fa-angle-right"></i> Add Category</li>
+				</ol>
+
+				<div class="validation-system">
+					<h2 id="forms-example" class="">Add Category</h2>
+
+					<div class="validation-form">
+						<!---->
+
+						<form>
+							<div class="col-md-4">
+								<a href="listcategory.html">
+									<h4>List Category</h4>
+								</a>
+							</div>
+							<div class="col-md-12 form-group1 group-mail">
+								<label class="control-label"> Name</label>
+								<input type="text" id="name" placeholder="Enter  Name" required="">
+							</div>
+							<div class="clearfix"> </div>
+
+							<div class="col-md-12 form-group1 group-mail">
+								<label class="control-label"> Image</label>
+								<input type="file" id="imgInp">							
+							</div>
+							<div class="clearfix"> </div>
+
+							<div class="col-md-12 form-group1 group-mail">
+									<label class="control-label"> Selected Image</label>
+									<img id="blah" src="#" alt="image" style="width: 30%;
+									height: 30%;" />
+								</div>
+
+							
+						
+						
+							
+							<div class="clearfix"> </div>
+							<div class="col-md-12 form-group">
+								<button type="button" id="btnsubmit" class="btn btn-primary">Submit</button>
+								<button type="buttn" id="btncancel" class="btn btn-default">Cancel</button>
+							</div>
+							<div class="clearfix"> </div>
+						</form>
+						<!---->
+					</div>
+
+				</div>
+
+			
+				<!--inner block start here-->
+				<div class="inner-block">
+
+				</div>
+				<!--inner block end here-->
+				<!--copy rights start here-->
+				<div class="copyrights" style="    position: fixed;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				
+				color: white;
+				text-align: center;">
+					<p>© Admin Panel. All Rights Reserved</a> </p>
+				</div>
+				<!--COPY rights end here-->
+			</div>
+		</div>
+		<!--//content-inner-->
+		<!--/sidebar-menu-->
+		<div class="sidebar-menu">
+			<header class="logo1">
+				<a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a>
+			</header>
+			<div style="border-top:1px ridge rgba(255, 255, 255, 0.15)"></div>
+			<div class="menu">
+				<ul id="menu">
+					<li><a href="index.html"><i class="fa fa-tachometer"></i> <span>Dashboard</span>
+							<div class="clearfix"></div>
+						</a></li>
+				
+					
+					<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i><span>Category</span> <span
+								class="fa fa-angle-right" style="float: right"></span>
+							<div class="clearfix"></div>
+						</a>
+						<ul>
+							<li><a href="addcategory.html"> Add Category</a></li>
+							<li><a href="listcategory.html">List Category</a></li>
+						</ul>
+					</li>
+					<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i><span>Brand</span> <span
+						class="fa fa-angle-right" style="float: right"></span>
+					<div class="clearfix"></div>
+				</a>
+				<ul>
+					<li><a href="addbrand.html"> Add Brand</a></li>
+					<li><a href="listbrand.html">List Brand</a></li>
+				</ul>
+			</li>
+				
+					<li><a href="#"><i class="fa fa-check-square-o nav_icon"></i><span>Product</span> <span
+								class="fa fa-angle-right" style="float: right"></span>
+							<div class="clearfix"></div>
+						</a>
+						<ul>
+							<li><a href="addproduct.html"> Add Product</a></li>
+							<li><a href="listproduct.html">List Product</a></li>
+						</ul>
+					</li>
+					<li><a href="index.html"><i class="fa fa-check-square-o nav_icon"></i> <span>Logout</span>
+						<div class="clearfix"></div>
+					</a></li>
+
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+
+	<!--js -->
+	<script src="js/jquery.nicescroll.js"></script>
+	<script src="js/scripts.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- /Bootstrap Core JavaScript -->
+	<!-- morris JavaScript -->
+
+	<script>
+				const token=localStorage.getItem("token_admin");
+	 console.log(token);
+	if(token == ""){
+		$(location).attr('href', 'signin.html')
+	}
+		    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#imgInp").change(function(){
+        readURL(this);
+    });
+
+	$(document).ready(function(){
+			$("#btnsubmit").click(function(){
+				const name=$("#name").val();
+				const image=$("#imgInp").val();
+				
+
+					if(name=="" || image=="" ){
+						alert("All Fields Are Required !")
+						//toastr.error('All fields are Required !', 'Error ', {timeOut: 5000,closeButton: true});
+
+					}else{
+						
+						let url = 'http://localhost:3000/api/setup/category/upload';
+						const fileInput = document.querySelector('#imgInp') ;alert(fileInput)
+						const formData = new FormData();
+
+						formData.append('imageFile', fileInput.files[0]);
+					let data ={imageFile:image};
+					fetch(url, {
+					method: 'POST', 
+					body: formData,
+					headers:{
+					//	'Content-Type': 'multipart/form-data',
+						'x-access-token':localStorage.getItem('token_admin')
+					}
+					}).then(res => res.json())
+					.then(function(data) {
+                             console.log(data)
+
+						let url1 = 'http://localhost:3000/api/setup/category/create';
+					let data1 ={Name:name,Image:data.filename};
+					fetch(url1, {
+					method: 'POST', 
+					body: JSON.stringify(data1),
+					headers:{
+						'Content-Type': 'application/json',
+						'x-access-token':localStorage.getItem('token_admin')
+					}
+					}).then(res => res.json())
+					.then(response => 
+					alert("success")
+
+					)
+					.catch(error => console.error('Error:', error),					
+					//toastr.error('Something Went Wrong !', 'Error ', {timeOut: 5000})
+					);
+						})
+				
+					.catch(error => console.error('Error:', error),					
+					//toastr.error('Something Went Wrong !', 'Error ', {timeOut: 5000})
+					);
+
+					
+
+
+					}
+					
+				
+				});
+	  })
+	
+	</script>
